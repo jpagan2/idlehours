@@ -1,0 +1,72 @@
+{
+  "root": "apps/idle-hours",
+  "sourceRoot": "apps/idle-hours/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/idle-hours",
+        "index": "apps/idle-hours/src/index.html",
+        "baseHref": "/",
+        "main": "apps/idle-hours/src/main.tsx",
+        "polyfills": "apps/idle-hours/src/polyfills.ts",
+        "tsConfig": "apps/idle-hours/tsconfig.app.json",
+        "assets": [
+          "apps/idle-hours/src/favicon.ico",
+          "apps/idle-hours/src/assets"
+        ],
+        "styles": ["apps/idle-hours/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/idle-hours/src/environments/environment.ts",
+              "with": "apps/idle-hours/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "idle-hours:build",
+        "hmr": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "idle-hours:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/idle-hours/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/idle-hours"],
+      "options": {
+        "jestConfig": "apps/idle-hours/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

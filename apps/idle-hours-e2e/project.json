@@ -1,0 +1,29 @@
+{
+  "root": "apps/idle-hours-e2e",
+  "sourceRoot": "apps/idle-hours-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/idle-hours-e2e/cypress.json",
+        "devServerTarget": "idle-hours:serve",
+        "tsConfig": "apps/idle-hours-e2e/tsconfig.json"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "idle-hours:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/idle-hours-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["idle-hours"]
+}

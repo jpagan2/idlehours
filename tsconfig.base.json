@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@idlehours/idle-hours-scheduler": [
+        "libs/idle-hours-scheduler/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

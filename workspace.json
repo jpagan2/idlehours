@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "idle-hours": "apps/idle-hours",
-    "idle-hours-e2e": "apps/idle-hours-e2e"
+    "idle-hours-e2e": "apps/idle-hours-e2e",
+    "idle-hours-scheduler": "libs/idle-hours-scheduler"
   }
 }

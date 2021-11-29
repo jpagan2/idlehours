@@ -9,11 +9,26 @@
   },
   "private": true,
   "dependencies": {
+    "@devexpress/dx-react-core": "^2.7.6",
+    "@devexpress/dx-react-scheduler": "^2.7.6",
+    "@devexpress/dx-react-scheduler-material-ui": "^2.7.6",
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "@mui/material": "^5.1.0",
+    "@types/recharts": "^1.8.23",
     "core-js": "^3.6.5",
+    "date-fns": "^2.25.0",
+    "formik": "^2.2.9",
+    "material-ui": "^0.20.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "recharts": "^2.1.6",
+    "recoil": "^0.5.2",
     "regenerator-runtime": "0.13.7",
-    "tslib": "^2.0.0"
+    "tslib": "^2.0.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@nrwl/cli": "13.1.3",

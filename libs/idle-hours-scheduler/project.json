@@ -1,0 +1,23 @@
+{
+  "root": "libs/idle-hours-scheduler",
+  "sourceRoot": "libs/idle-hours-scheduler/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/idle-hours-scheduler/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/idle-hours-scheduler"],
+      "options": {
+        "jestConfig": "libs/idle-hours-scheduler/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

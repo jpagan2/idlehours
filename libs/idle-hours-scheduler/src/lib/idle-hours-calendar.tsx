@@ -16,15 +16,19 @@ import {
   AllDayPanel,
   ConfirmationDialog,
   DragDropProvider,
+  Resources,
 } from '@devexpress/dx-react-scheduler-material-ui';
 import {
   allWeeklySchedules,
+  selectedUserHobbies,
   selectedWeeklyScheduleState,
 } from './idle-hours.state';
 import { useRecoilState } from 'recoil';
 import {
   createBlankWeeklySchedule,
   DailySchedule,
+  HobbyConfiguration,
+  UserHobbyConfigurations,
   WeeklySchedule,
 } from './idle-hours-interfaces';
 import { IdleHoursHelper } from './idle-hours.helpers';
@@ -92,6 +96,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: { background: alpha('#323337', 0.9) },
 }));
 
+const resources = [
+  {
+    fieldName: 'type',
+    title: 'Type',
+    instances: [
+      { id: '5', text: 'Work', color: '#D3CFCC' },
+      { id: '4', text: 'High', color: '#FD629B' },
+      { id: '1', text: 'High', color: '#FEA36B' },
+      { id: '2', text: 'High', color: '#81E271' },
+      { id: '3', text: 'High', color: '#AB85DC' },
+    ],
+  },
+];
+
 const TimeTableCell = (props: any) => {
   const classes = useStyles();
   const { startDate } = props;
@@ -126,6 +144,8 @@ export const IdleHoursCalendar = () => {
   const [appointmentChanges, setAppointmentChanges] = React.useState({});
   const [editingAppointment, setEditingAppointment] =
     React.useState<Partial<AppointmentModel>>();
+  const [currentUserHobbyConfig, setCurrentUserHobbyConfig] =
+    useRecoilState<UserHobbyConfigurations>(selectedUserHobbies);
 
   const currentDate = startOfWeek(new Date());
   const [selectedWeek, setSelectedWeek] = React.useState<Date>(currentDate);
@@ -171,16 +191,9 @@ export const IdleHoursCalendar = () => {
     <>
       <Button
         onClick={() => {
-          console.log('configuring user hobbies');
-        }}
-      >
-        Configure User Hobbies
-      </Button>
-      <Button
-        onClick={() => {
           console.log('generating work schedule');
           const workSched = IdleHoursHelper.generateWorkSchedule(selectedWeek);
-
+          console.log('done');
           setSelectedWeeklySchedule(workSched);
           updateAllWeeklySchedules(workSched);
           setData(
@@ -192,9 +205,29 @@ export const IdleHoursCalendar = () => {
       </Button>
       <Button
         onClick={() => {
+          console.log('generating work schedule');
+          console.log('SELECTED WEEKLY SCHEDULE', selectedWeeklySchedule);
+          const hobbySched = IdleHoursHelper.scheduleHobbies(
+            currentUserHobbyConfig,
+            allSelectedWeeklySchedules,
+            selectedWeeklySchedule
+          );
+
+          console.log('done', hobbySched);
+          setSelectedWeeklySchedule(hobbySched);
+          updateAllWeeklySchedules(hobbySched);
+          setData(
+            IdleHoursHelper.fromWeeklyScheduleToAppointmentArray(hobbySched)
+          );
+        }}
+      >
+        Schedule Hobbies
+      </Button>
+      <Button
+        onClick={() => {
           const emptySched = createBlankWeeklySchedule(startOfWeek(new Date()));
           setSelectedWeeklySchedule(emptySched);
-          updateAllWeeklySchedules();
+          updateAllWeeklySchedules(emptySched);
         }}
       >
         Clear Schedule
@@ -287,6 +320,7 @@ export const IdleHoursCalendar = () => {
               return true;
             }}
           />
+          <Resources data={resources} />
         </Scheduler>
       </Paper>
     </>

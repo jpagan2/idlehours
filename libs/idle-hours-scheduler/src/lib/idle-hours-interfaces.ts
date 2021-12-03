@@ -3,6 +3,7 @@ import { addDays } from 'date-fns';
 export enum HobbyTag {
   Biking = 'Biking',
   Meditation = 'Meditation',
+  Saxaphone = 'Saxaphone',
 }
 
 export interface ScheduleBlock {
